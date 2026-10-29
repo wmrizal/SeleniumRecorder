@@ -1,0 +1,16 @@
+{
+  "name": "selenium-studio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A small local recorder and playback studio for Selenium workflows.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "selenium-webdriver": "^4.27.0"
+  }
+}

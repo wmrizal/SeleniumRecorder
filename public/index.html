@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f7f3ea">
+    <title>Selenium Studio</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="Selenium Studio home">
+          <span class="brand-mark" aria-hidden="true">/</span>
+          <span>Selenium <strong>Studio</strong></span>
+        </a>
+        <div class="topbar-meta">
+          <span class="local-dot" aria-hidden="true"></span>
+          <span>Local session</span>
+          <span class="version-tag">v1.0</span>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero-section">
+          <div class="hero-copy">
+            <p class="eyebrow"><span class="eyebrow-line"></span> Browser workflow recorder</p>
+            <h1>Make a browser session<br><em>replayable.</em></h1>
+            <p class="hero-lede">Capture the useful moments, then run them back through a clean Selenium driver.</p>
+          </div>
+          <div class="session-readout" aria-live="polite">
+            <div class="readout-topline">
+              <span class="readout-label">Session state</span>
+              <span class="status-pill" id="status-pill">Ready</span>
+            </div>
+            <strong id="session-title">Ready to capture</strong>
+            <span id="session-detail">Choose a starting page to begin.</span>
+            <div class="readout-rule"><span id="readout-progress"></span></div>
+          </div>
+        </section>
+
+        <section class="workspace-grid">
+          <aside class="panel control-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="section-kicker">01 / Control desk</p>
+                <h2>Start a session</h2>
+              </div>
+              <span class="heading-glyph" aria-hidden="true">+</span>
+            </div>
+
+            <form id="record-form">
+              <label class="field-label" for="target-url">Starting URL</label>
+              <div class="url-field">
+                <span class="url-prefix">URL</span>
+                <input id="target-url" name="url" type="url" value="http://localhost:3000/demo.html" required autocomplete="url">
+              </div>
+
+              <fieldset class="browser-fieldset">
+                <legend class="field-label">Browser</legend>
+                <div class="browser-options">
+                  <label class="browser-option">
+                    <input type="radio" name="browser" value="chrome" checked>
+                    <span class="browser-option-content">
+                      <span class="browser-logo chrome-logo" aria-hidden="true"></span>
+                      <span><strong>Chrome</strong><small>Recommended</small></span>
+                    </span>
+                    <span class="radio-dot" aria-hidden="true"></span>
+                  </label>
+                  <label class="browser-option">
+                    <input type="radio" name="browser" value="edge">
+                    <span class="browser-option-content">
+                      <span class="browser-logo edge-logo" aria-hidden="true"></span>
+                      <span><strong>Edge</strong><small>Chromium</small></span>
+                    </span>
+                    <span class="radio-dot" aria-hidden="true"></span>
+                  </label>
+                </div>
+              </fieldset>
+
+              <div class="primary-actions">
+                <button class="button button-primary" id="record-button" type="submit">
+                  <span class="button-symbol" aria-hidden="true">●</span>
+                  <span>Record browser</span>
+                </button>
+                <button class="button button-stop" id="stop-button" type="button" disabled>
+                  <span class="button-symbol" aria-hidden="true">■</span>
+                  <span>Stop recording</span>
+                </button>
+              </div>
+              <div class="secondary-actions">
+                <button class="button button-secondary" id="play-button" type="button" disabled>
+                  <span class="button-symbol" aria-hidden="true">▶</span>
+                  <span>Play back</span>
+                </button>
+                <button class="button button-quiet" id="close-button" type="button" disabled>
+                  <span class="button-symbol" aria-hidden="true">×</span>
+                  <span>Close browser</span>
+                </button>
+              </div>
+              <button class="button button-clear" id="clear-button" type="button" disabled>
+                <span class="button-symbol" aria-hidden="true">↺</span>
+                <span>Clear session</span>
+              </button>
+            </form>
+
+            <div class="control-note">
+              <span class="note-icon" aria-hidden="true">i</span>
+              <p>The launched browser window is the recording surface. This panel stays live while you work.</p>
+            </div>
+          </aside>
+
+          <section class="panel timeline-panel">
+            <div class="panel-heading timeline-heading">
+              <div>
+                <p class="section-kicker">02 / Action timeline</p>
+                <h2>What happened</h2>
+              </div>
+              <span class="action-count" id="action-count">0 actions</span>
+            </div>
+            <div class="timeline" id="timeline" aria-live="polite">
+              <div class="timeline-empty">
+                <span class="empty-mark" aria-hidden="true">+</span>
+                <strong>Your workflow will appear here</strong>
+                <span>Clicks, text entry, navigation, and key actions.</span>
+              </div>
+            </div>
+            <div class="timeline-footer">
+              <span class="footer-dot" aria-hidden="true"></span>
+              <span id="timeline-footer-text">Waiting for a browser session</span>
+            </div>
+          </section>
+        </section>
+
+        <section class="code-panel panel">
+          <div class="code-heading">
+            <div>
+              <p class="section-kicker">03 / Export</p>
+              <h2>Generated Selenium</h2>
+            </div>
+            <div class="code-actions">
+              <button class="text-button" id="copy-button" type="button" disabled>Copy Python</button>
+              <button class="text-button text-button-accent" id="download-button" type="button" disabled>Download .py</button>
+            </div>
+          </div>
+          <div class="code-window">
+            <div class="code-window-bar">
+              <span class="window-lights" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span>workflow.py</span>
+              <span class="code-language">PYTHON</span>
+            </div>
+            <pre><code id="python-code"># Record a workflow to generate Selenium code.</code></pre>
+          </div>
+        </section>
+      </main>
+
+      <footer class="app-footer">
+        <span>SELENIUM STUDIO</span>
+        <span>Local and ephemeral by design</span>
+      </footer>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="/app.js"></script>
+  </body>
+</html>

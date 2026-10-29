@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio Demo Page</title>
+    <style>
+      :root { color-scheme: light; font-family: "Segoe UI", sans-serif; color: #17212b; background: #f5f0e7; }
+      body { display: grid; min-height: 100vh; margin: 0; place-items: center; background: radial-gradient(circle at 75% 20%, #f2c65f 0 10%, transparent 10.2%), #f5f0e7; }
+      main { width: min(520px, calc(100% - 36px)); padding: 34px; border: 1px solid #d8d0c0; border-radius: 8px; background: #fffdf8; box-shadow: 0 22px 50px rgba(34, 39, 43, 0.1); }
+      p { color: #6f766f; line-height: 1.6; }
+      label { display: block; margin: 24px 0 7px; color: #6f766f; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+      input { width: 100%; padding: 11px 12px; border: 1px solid #c7c0b3; border-radius: 4px; box-sizing: border-box; font: inherit; }
+      button { margin-top: 20px; padding: 11px 15px; border: 0; border-radius: 4px; background: #1d59d4; color: white; font: inherit; font-weight: 700; cursor: pointer; }
+      output { display: block; min-height: 24px; margin-top: 25px; color: #245537; font-weight: 700; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p style="color:#e76d5c;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;">Local practice page</p>
+      <h1>Small actions, useful proof.</h1>
+      <p>Use this offline page to try a recording without sending data to another site.</p>
+      <label for="demo-name">Your name</label>
+      <input id="demo-name" name="demo-name" data-testid="demo-name" placeholder="Ada Lovelace">
+      <button id="demo-submit" data-testid="demo-submit" type="button">Run sample</button>
+      <output id="demo-result" aria-live="polite"></output>
+    </main>
+    <script>
+      const input = document.querySelector('#demo-name');
+      const button = document.querySelector('#demo-submit');
+      const result = document.querySelector('#demo-result');
+      button.addEventListener('click', () => {
+        result.textContent = `Hello, ${input.value.trim() || 'browser explorer'}.`;
+      });
+      if (new URLSearchParams(location.search).get('autoplay') === '1') {
+        window.setTimeout(() => button.click(), 3500);
+      }
+    </script>
+  </body>
+</html>
